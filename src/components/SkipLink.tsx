@@ -2,13 +2,16 @@
 
 export default function SkipLink() {
   return (
-    <a
-      href="#main-content"
-      style={{ position: "absolute", left: "-9999px", top: 0, zIndex: 999, background: "var(--c-green)", color: "white", padding: "8px 16px", fontSize: "0.9rem", textDecoration: "none" }}
-      onFocus={(e) => { e.currentTarget.style.left = "0"; }}
-      onBlur={(e) => { e.currentTarget.style.left = "-9999px"; }}
-    >
-      Skip to content
-    </a>
+    <>
+      <a href="#main-content" className="skip-link">Skip to content</a>
+      <style>{`
+        .skip-link {
+          position: absolute; left: -9999px; top: 0; z-index: 999;
+          background: var(--c-green); color: white; padding: 8px 16px;
+          font-size: 0.9rem; text-decoration: none;
+        }
+        .skip-link:focus { left: 0; }
+      `}</style>
+    </>
   );
 }
