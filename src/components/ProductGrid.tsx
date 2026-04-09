@@ -56,7 +56,25 @@ export default function ProductGrid() {
         </ProductGridLayout>
       </section>
 
-      {/* Banner */}
+      {/* Body Care */}
+      <section id="body" style={{ padding: "0 4vw 5rem", background: "var(--c-bg2)" }}>
+        <SectionHeader label="Wellness" title="Body Care" />
+        <CatHeader label="Lotions, Gels & Remedies" />
+        <ProductGridLayout cols={3}>
+          {body.map((p) => <ProductCard key={p.id} product={p} />)}
+        </ProductGridLayout>
+      </section>
+
+      {/* Hair Care */}
+      <section id="hair" style={{ padding: "0 4vw 5rem", background: "var(--c-bg)" }}>
+        <SectionHeader label="Tresses" title="Hair Care" />
+        <CatHeader label="Shampoos, Conditioners & Oils" />
+        <ProductGridLayout>
+          {hair.map((p) => <ProductCard key={p.id} product={p} />)}
+        </ProductGridLayout>
+      </section>
+
+      {/* Brand Story Banner */}
       <section style={{ background: "var(--c-green)", padding: "5rem 8vw", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "5rem", alignItems: "center" }}>
         <div>
           <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 300, color: "var(--c-cream)", lineHeight: 1.2, marginBottom: 20 }}>
@@ -93,24 +111,6 @@ export default function ProductGrid() {
             </div>
           ))}
         </div>
-      </section>
-
-      {/* Body Care */}
-      <section id="body" style={{ padding: "0 4vw 5rem", background: "var(--c-bg2)" }}>
-        <SectionHeader label="Wellness" title="Body Care" />
-        <CatHeader label="Lotions, Gels & Remedies" />
-        <ProductGridLayout cols={3}>
-          {body.map((p) => <ProductCard key={p.id} product={p} />)}
-        </ProductGridLayout>
-      </section>
-
-      {/* Hair Care */}
-      <section id="hair" style={{ padding: "0 4vw 5rem", background: "var(--c-bg)" }}>
-        <SectionHeader label="Tresses" title="Hair Care" />
-        <CatHeader label="Shampoos, Conditioners & Oils" />
-        <ProductGridLayout>
-          {hair.map((p) => <ProductCard key={p.id} product={p} />)}
-        </ProductGridLayout>
       </section>
     </>
   );
