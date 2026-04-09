@@ -75,39 +75,25 @@ export default function ProductGrid() {
       </section>
 
       {/* Brand Story Banner */}
-      <section style={{ background: "var(--c-green)", padding: "5rem 8vw", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "5rem", alignItems: "center" }}>
-        <div>
-          <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 300, color: "var(--c-cream)", lineHeight: 1.2, marginBottom: 20 }}>
-            Nature&apos;s Finest, Bottled for You
-          </h2>
-          <p style={{ color: "rgba(255,249,242,0.65)", lineHeight: 1.8, fontSize: "0.95rem", marginBottom: 32 }}>
-            Every H&N product is formulated with purpose &mdash; combining ancient botanical wisdom with modern skincare science. No harsh chemicals. No compromise.
-          </p>
-          <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: 14 }}>
-            {[
-              "100% natural key ingredients",
-              "Free from parabens & harsh sulfates",
-              "Suitable for sensitive skin",
-              "Cruelty-free formulations",
-              "Crafted by Synergy\u2122",
-            ].map((item) => (
-              <li key={item} style={{ display: "flex", alignItems: "center", gap: 12, fontSize: "0.9rem", color: "rgba(255,249,242,0.75)" }}>
-                <span style={{ width: 18, height: 1, background: "var(--c-gold-light)", flexShrink: 0 }} />
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+      <section style={{ background: "var(--c-green)", padding: "5rem 8vw", textAlign: "center" }}>
+        <span style={{ fontSize: "0.72rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "var(--c-gold-light)", marginBottom: 16, display: "block" }}>Our Promise</span>
+        <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 300, color: "var(--c-cream)", lineHeight: 1.2, marginBottom: 20, maxWidth: 600, margin: "0 auto 20px" }}>
+          Nature&apos;s Finest, Bottled for You
+        </h2>
+        <p style={{ color: "rgba(255,249,242,0.55)", lineHeight: 1.8, fontSize: "0.95rem", maxWidth: 560, margin: "0 auto 40px" }}>
+          Every H&N product is formulated with purpose &mdash; combining ancient botanical wisdom with modern skincare science. No harsh chemicals. No compromise.
+        </p>
+        <div style={{ display: "flex", justifyContent: "center", gap: 32, flexWrap: "wrap" }}>
           {[
-            { title: "Rosemary Lavender Hair Oil", desc: "Stimulates scalp \u00b7 Reduces hair fall \u00b7 Adds natural shine \u00b7 100ml" },
-            { title: "Herbal VapoRub", desc: "Eucalyptus \u00b7 Cajeput \u00b7 Peppermint \u00b7 Shea Butter \u00b7 Net Wt. 17g" },
-            { title: "Goat Milk & Honey Almond Lotion", desc: "Deeply nourishes \u00b7 Hydrates \u00b7 Softens skin naturally \u00b7 120ml" },
-            { title: "Red Wine Hydrating Shower Gel", desc: "Powerful antioxidants \u00b7 Rejuvenates \u00b7 Youthful glow \u00b7 200ml" },
-          ].map((card) => (
-            <div key={card.title} style={{ background: "rgba(255,249,242,0.06)", border: "1px solid rgba(212,169,106,0.25)", borderRadius: 8, padding: "1.2rem 1.4rem" }}>
-              <div style={{ fontFamily: "var(--font-serif)", color: "var(--c-gold-light)", fontSize: "1.05rem", marginBottom: 4 }}>{card.title}</div>
-              <div style={{ fontSize: "0.82rem", color: "rgba(255,249,242,0.45)" }}>{card.desc}</div>
+            "100% Natural",
+            "Paraben Free",
+            "Sensitive Skin Safe",
+            "Cruelty Free",
+            "By Synergy\u2122",
+          ].map((item) => (
+            <div key={item} style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--c-gold-light)", flexShrink: 0 }} />
+              <span style={{ fontSize: "0.85rem", color: "rgba(255,249,242,0.7)", letterSpacing: "0.05em" }}>{item}</span>
             </div>
           ))}
         </div>
