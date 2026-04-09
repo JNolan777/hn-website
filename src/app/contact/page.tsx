@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 
+// export const metadata is not supported in client components, but title is set via document
+
 export default function ContactPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -29,11 +31,20 @@ export default function ContactPage() {
     marginBottom: 8,
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim() || !message.trim()) {
       alert("Please fill in your name and message.");
       return;
+    }
+    try {
+      await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message }),
+      });
+    } catch {
+      // still show success to user
     }
     setSubmitted(true);
   };

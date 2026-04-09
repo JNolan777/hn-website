@@ -2,14 +2,20 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import ProductGrid from "@/components/ProductGrid";
 import CartDrawer from "@/components/CartDrawer";
+import Reviews from "@/components/Reviews";
+import Combos from "@/components/Combos";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 export default function Home() {
   return (
     <>
       <Navbar />
       <Hero />
+      <Combos />
       <ProductGrid />
+      <Reviews />
       <CartDrawer />
+      <WhatsAppButton />
 
       {/* Footer */}
       <footer id="contact" style={{ background: "var(--c-bg3)", borderTop: "1px solid var(--c-border)", padding: "4rem 8vw", display: "grid", gridTemplateColumns: "1.5fr 1fr 1fr", gap: "3rem" }}>
@@ -41,11 +47,11 @@ export default function Home() {
           </ul>
         </div>
         <div>
-          <h4 style={{ fontSize: "0.7rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "var(--c-gold)", marginBottom: 20 }}>About</h4>
+          <h4 style={{ fontSize: "0.7rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "var(--c-gold)", marginBottom: 20 }}>Quick Links</h4>
           <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: 12 }}>
             {[
-              { label: "Our Philosophy", href: "#soaps" },
-              { label: "Natural Ingredients", href: "#soaps" },
+              { label: "Our Story", href: "#about" },
+              { label: "Contact Us", href: "/contact" },
               { label: "Produced by Synergy\u2122", href: "/contact" },
             ].map((item) => (
               <li key={item.label}>
