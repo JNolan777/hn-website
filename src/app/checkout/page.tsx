@@ -102,7 +102,7 @@ export default function CheckoutPage() {
     <div>
       <label htmlFor={id} style={labelStyle}>{label}{opts?.required !== false ? " *" : ""}</label>
       <input id={id} type={opts?.type || "text"} value={value} onChange={(e) => onChange(e.target.value)} style={{ ...inputStyle, borderColor: errors[id] ? "#c44" : "var(--c-border)" }} placeholder={opts?.placeholder} />
-      {errors[id] && <p style={{ fontSize: "0.75rem", color: "#c44", marginTop: 4 }}>{errors[id]}</p>}
+      {errors[id] && <p role="alert" style={{ fontSize: "0.75rem", color: "#c44", marginTop: 4 }}>{errors[id]}</p>}
     </div>
   );
 
@@ -133,7 +133,7 @@ export default function CheckoutPage() {
           <a href="/" style={{ color: "var(--c-muted)", fontSize: "0.95rem", textDecoration: "none" }}>&larr; Back to shop</a>
           <h1 style={{ fontFamily: "var(--font-serif)", fontSize: "2.2rem", color: "var(--c-green)", fontWeight: 300, marginTop: 24, marginBottom: 40 }}>Checkout</h1>
 
-          {errors.form && <div style={{ background: "#fde8e8", border: "1px solid #f5c6c6", borderRadius: 8, padding: "12px 16px", marginBottom: 24, color: "#c44", fontSize: "0.88rem" }}>{errors.form}</div>}
+          {errors.form && <div role="alert" aria-live="polite" style={{ background: "#fde8e8", border: "1px solid #f5c6c6", borderRadius: 8, padding: "12px 16px", marginBottom: 24, color: "#c44", fontSize: "0.88rem" }}>{errors.form}</div>}
 
           <div className="grid-checkout">
             <div>

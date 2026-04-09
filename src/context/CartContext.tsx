@@ -69,7 +69,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => { setItems(loadCart()); setLoaded(true); }, []);
-  useEffect(() => { if (loaded) saveCart(items); }, [items, loaded]);
+  useEffect(() => {
+    if (!loaded) return;
+    const timer = setTimeout(() => saveCart(items), 300);
+    return () => clearTimeout(timer);
+  }, [items, loaded]);
 
   const addItem = useCallback((product: Product) => {
     setItems((prev) => {

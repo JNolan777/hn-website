@@ -2,6 +2,7 @@
 
 import { useParams } from "next/navigation";
 import Image from "next/image";
+import ImageZoom from "@/components/ImageZoom";
 import { getProductBySlug, PRODUCTS } from "@/lib/products";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/components/Toast";
@@ -77,7 +78,7 @@ export default function ProductPage() {
 
           <div className="grid-product-detail">
             <div style={{ position: "relative", height: "clamp(280px, 40vw, 450px)", borderRadius: 16, overflow: "hidden", border: "1px solid var(--c-border)" }}>
-              <Image src={product.img} alt={`${product.name} - ${product.longDesc.slice(0, 80)}`} fill style={{ objectFit: "cover" }} sizes="50vw" priority />
+              <ImageZoom src={product.img} alt={`${product.name} - ${product.longDesc.slice(0, 80)}`} />
               {product.badge && (
                 <span style={{ position: "absolute", top: 16, left: 16, background: product.badge === "Bestseller" ? "var(--c-green)" : "var(--c-gold)", color: "white", padding: "6px 14px", borderRadius: 6, fontSize: "0.7rem", letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 500, zIndex: 1 }}>
                   {product.badge}

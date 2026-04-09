@@ -38,6 +38,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en" className={`${cormorant.variable} ${jost.variable} antialiased`}>
       <head>
         <meta name="theme-color" content="#2d4a2d" />
+        <link rel="canonical" href={process.env.NEXT_PUBLIC_SITE_URL || "https://hn-website-seven.vercel.app"} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

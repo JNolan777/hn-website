@@ -5,6 +5,7 @@ import CartDrawer from "@/components/CartDrawer";
 import Reviews from "@/components/Reviews";
 import Combos from "@/components/Combos";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import BackToTop from "@/components/BackToTop";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <Reviews />
       <CartDrawer />
       <WhatsAppButton />
+      <BackToTop />
 
       {/* Footer */}
       <footer id="contact" className="grid-footer" style={{ background: "var(--c-bg3)", borderTop: "1px solid var(--c-border)", padding: "4rem 8vw" }}>

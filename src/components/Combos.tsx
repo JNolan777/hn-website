@@ -6,6 +6,7 @@ export default function Combos() {
       <div style={{ textAlign: "center", marginBottom: 36 }}>
         <span style={{ display: "block", fontSize: "0.72rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "var(--c-gold)", marginBottom: 12 }}>Save More</span>
         <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(1.8rem,3vw,2.5rem)", fontWeight: 300, color: "var(--c-green)" }}>Bundle & Save</h2>
+        <p style={{ fontSize: "0.85rem", color: "var(--c-muted)", marginTop: 8 }}>Discounts apply automatically in your cart</p>
       </div>
       <div className="grid-combos" style={{ maxWidth: 900, margin: "0 auto" }}>
         {COMBOS.map((combo) => (
