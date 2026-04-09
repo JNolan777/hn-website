@@ -48,7 +48,7 @@ export default function ProductGrid() {
   return (
     <>
       {/* Soaps */}
-      <section id="soaps" style={{ padding: "0 4vw 5rem", background: "var(--c-bg)" }}>
+      <section id="soaps" style={{ padding: "0 8vw 5rem", background: "var(--c-bg)" }}>
         <SectionHeader label="Artisan" title="Soaps" />
         <CatHeader label="Handcrafted Natural Soaps" />
         <ProductGridLayout>
@@ -57,7 +57,7 @@ export default function ProductGrid() {
       </section>
 
       {/* Body Care */}
-      <section id="body" style={{ padding: "0 4vw 5rem", background: "var(--c-bg2)" }}>
+      <section id="body" style={{ padding: "0 8vw 5rem", background: "var(--c-bg2)" }}>
         <SectionHeader label="Wellness" title="Body Care" />
         <CatHeader label="Lotions, Gels & Remedies" />
         <ProductGridLayout cols={3}>
@@ -66,7 +66,7 @@ export default function ProductGrid() {
       </section>
 
       {/* Hair Care */}
-      <section id="hair" style={{ padding: "0 4vw 5rem", background: "var(--c-bg)" }}>
+      <section id="hair" style={{ padding: "0 8vw 5rem", background: "var(--c-bg)" }}>
         <SectionHeader label="Tresses" title="Hair Care" />
         <CatHeader label="Shampoos, Conditioners & Oils" />
         <ProductGridLayout>
@@ -75,7 +75,7 @@ export default function ProductGrid() {
       </section>
 
       {/* Our Story */}
-      <section id="about" style={{ background: "var(--c-green)", padding: "5rem 4vw" }}>
+      <section id="about" style={{ background: "var(--c-green)", padding: "5rem 8vw" }}>
         <div style={{ textAlign: "center", marginBottom: 48 }}>
           <span style={{ fontSize: "0.72rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "var(--c-gold-light)", marginBottom: 12, display: "block" }}>Behind the Brand</span>
           <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 300, color: "var(--c-cream)", lineHeight: 1.2, marginBottom: 16 }}>
