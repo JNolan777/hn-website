@@ -74,15 +74,33 @@ export default function ProductGrid() {
         </ProductGridLayout>
       </section>
 
-      {/* Brand Story Banner */}
-      <section style={{ background: "var(--c-green)", padding: "5rem 8vw", textAlign: "center" }}>
-        <span style={{ fontSize: "0.72rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "var(--c-gold-light)", marginBottom: 16, display: "block" }}>Our Promise</span>
-        <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 300, color: "var(--c-cream)", lineHeight: 1.2, marginBottom: 20, maxWidth: 600, margin: "0 auto 20px" }}>
-          Nature&apos;s Finest, Bottled for You
-        </h2>
-        <p style={{ color: "rgba(255,249,242,0.55)", lineHeight: 1.8, fontSize: "0.95rem", maxWidth: 560, margin: "0 auto 40px" }}>
-          Every H&N product is formulated with purpose &mdash; combining ancient botanical wisdom with modern skincare science. No harsh chemicals. No compromise.
-        </p>
+      {/* Our Story */}
+      <section id="about" style={{ background: "var(--c-green)", padding: "5rem 4vw" }}>
+        <div style={{ textAlign: "center", marginBottom: 48 }}>
+          <span style={{ fontSize: "0.72rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "var(--c-gold-light)", marginBottom: 12, display: "block" }}>Behind the Brand</span>
+          <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 300, color: "var(--c-cream)", lineHeight: 1.2, marginBottom: 16 }}>
+            Handcrafted with Care
+          </h2>
+          <p style={{ color: "rgba(255,249,242,0.55)", lineHeight: 1.8, fontSize: "0.95rem", maxWidth: 560, margin: "0 auto" }}>
+            Every H&N product is lovingly handcrafted using ancient botanical wisdom and natural ingredients. No harsh chemicals. No compromise.
+          </p>
+        </div>
+
+        {/* Photo grid */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 6, maxWidth: 1000, margin: "0 auto 48px", borderRadius: 16, overflow: "hidden" }}>
+          {[
+            { src: "/images/story/craft-7.jpg", alt: "Crafting herbal soap" },
+            { src: "/images/story/craft-6.jpg", alt: "Bamboo and charcoal soap" },
+            { src: "/images/story/craft-9.jpg", alt: "Red wine soap making" },
+            { src: "/images/story/craft-1.jpg", alt: "Soap workshop" },
+            { src: "/images/story/craft-8.jpg", alt: "Papaya soap" },
+            { src: "/images/story/craft-2.jpg", alt: "Handcrafting process" },
+          ].map((img) => (
+            <img key={img.src} src={img.src} alt={img.alt} style={{ width: "100%", height: 240, objectFit: "cover", display: "block" }} />
+          ))}
+        </div>
+
+        {/* Trust badges */}
         <div style={{ display: "flex", justifyContent: "center", gap: 32, flexWrap: "wrap" }}>
           {[
             "100% Natural",
