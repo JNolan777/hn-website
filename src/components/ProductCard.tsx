@@ -37,26 +37,27 @@ export default function ProductCard({ product }: { product: Product }) {
         <p className="text-[0.88rem] leading-relaxed mb-5 flex-1" style={{ color: "var(--c-muted)" }}>
           {product.desc}
         </p>
-        {/* Price + tag row */}
-        <div className="flex items-center justify-between mb-4">
+        {/* Price row with tag and button inline */}
+        <div className="flex items-center justify-between">
           <span className="text-[1.35rem] font-medium" style={{ color: "var(--c-green)" }}>
             &#8377;{product.price}
           </span>
-          <span
-            className="text-[0.65rem] tracking-[0.12em] uppercase px-3 py-1 rounded-full"
-            style={{ background: "var(--c-bg2)", color: "var(--c-gold)", border: "1px solid var(--c-border)" }}
-          >
-            {catLabel}
-          </span>
+          <div className="flex items-center gap-2">
+            <span
+              className="text-[0.65rem] tracking-[0.12em] uppercase px-3 py-1 rounded-full"
+              style={{ background: "var(--c-bg2)", color: "var(--c-gold)", border: "1px solid var(--c-border)" }}
+            >
+              {catLabel}
+            </span>
+            <button
+              onClick={handleAdd}
+              className="border-none cursor-pointer text-[0.7rem] tracking-[0.1em] uppercase px-4 py-2 rounded-lg font-medium text-white transition-all hover:opacity-90"
+              style={{ fontFamily: "var(--font-sans)", background: added ? "var(--c-green-light)" : "var(--c-green)" }}
+            >
+              {added ? "Added!" : "+ Add"}
+            </button>
+          </div>
         </div>
-        {/* Full-width add button */}
-        <button
-          onClick={handleAdd}
-          className="w-full border-none cursor-pointer text-[0.75rem] tracking-[0.15em] uppercase py-3 rounded-lg font-medium text-white transition-all hover:opacity-90"
-          style={{ fontFamily: "var(--font-sans)", background: added ? "var(--c-green)" : "var(--c-green)" }}
-        >
-          {added ? "Added!" : "+ Add to Cart"}
-        </button>
       </div>
     </div>
   );
