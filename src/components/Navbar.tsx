@@ -19,12 +19,12 @@ export default function Navbar() {
   return (
     <>
       <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, padding: "1rem 4vw", display: "flex", alignItems: "center", justifyContent: "space-between", background: "rgba(250,247,242,0.92)", backdropFilter: "blur(12px)", borderBottom: "1px solid var(--c-border)" }}>
-        <a href="/" style={{ fontFamily: "var(--font-serif)", fontSize: "1.8rem", color: "var(--c-green)", textDecoration: "none", fontWeight: 600 }}>
+        <a href="/" style={{ fontFamily: "var(--font-serif)", fontSize: "1.8rem", color: "var(--c-green)", textDecoration: "none", fontWeight: 600, flexShrink: 0 }}>
           H<span style={{ color: "var(--c-gold)" }}>&</span>N
         </a>
 
-        {/* Desktop nav */}
-        <ul style={{ display: "flex", gap: 32, listStyle: "none", alignItems: "center" }} className="hide-mobile">
+        {/* Desktop nav - centered absolutely */}
+        <ul style={{ position: "absolute", left: "50%", transform: "translateX(-50%)", display: "flex", gap: 32, listStyle: "none", alignItems: "center" }} className="hide-mobile">
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
               <a href={link.href} style={{ color: "var(--c-muted)", textDecoration: "none", fontSize: "0.78rem", letterSpacing: "0.15em", textTransform: "uppercase", transition: "color 0.2s" }}>{link.label}</a>
