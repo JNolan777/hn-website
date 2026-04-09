@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section style={{ minHeight: "100vh", background: "linear-gradient(160deg, #e8f0e0 0%, #f3ede3 45%, #fdf6ee 100%)", display: "grid", gridTemplateColumns: "1fr 1fr", alignItems: "center", padding: "7rem 6vw 4rem", gap: "4rem", position: "relative", overflow: "hidden" }}>
+    <section className="grid-hero" style={{ minHeight: "100vh", background: "linear-gradient(160deg, #e8f0e0 0%, #f3ede3 45%, #fdf6ee 100%)", alignItems: "center", padding: "7rem 6vw 4rem", position: "relative", overflow: "hidden" }}>
       <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "radial-gradient(ellipse at 80% 20%, rgba(74,103,65,0.07) 0%, transparent 55%), radial-gradient(ellipse at 10% 90%, rgba(181,136,74,0.05) 0%, transparent 50%)" }} />
 
       <div style={{ position: "relative", zIndex: 1 }}>

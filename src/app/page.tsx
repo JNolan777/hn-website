@@ -18,7 +18,7 @@ export default function Home() {
       <WhatsAppButton />
 
       {/* Footer */}
-      <footer id="contact" style={{ background: "var(--c-bg3)", borderTop: "1px solid var(--c-border)", padding: "4rem 8vw", display: "grid", gridTemplateColumns: "1.5fr 1fr 1fr", gap: "3rem" }}>
+      <footer id="contact" className="grid-footer" style={{ background: "var(--c-bg3)", borderTop: "1px solid var(--c-border)", padding: "4rem 8vw" }}>
         <div>
           <h3 style={{ fontFamily: "var(--font-serif)", fontSize: "2.5rem", fontWeight: 300, color: "var(--c-green)", marginBottom: 4 }}>
             H<span style={{ color: "var(--c-gold)" }}>&</span>N

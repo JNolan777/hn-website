@@ -41,10 +41,10 @@ export default function SearchBar() {
         onFocus={() => setOpen(true)}
         placeholder="Search products..."
         aria-label="Search products"
-        style={{ background: "rgba(181,136,74,0.08)", border: "1px solid var(--c-border)", color: "var(--c-text)", padding: "8px 14px", borderRadius: 8, fontSize: "0.8rem", width: 180, outline: "none", fontFamily: "var(--font-sans)" }}
+        style={{ background: "rgba(181,136,74,0.08)", border: "1px solid var(--c-border)", color: "var(--c-text)", padding: "10px 14px", borderRadius: 8, fontSize: "0.85rem", width: "100%", maxWidth: 220, outline: "none", fontFamily: "var(--font-sans)" }}
       />
       {open && results.length > 0 && (
-        <div role="listbox" style={{ position: "absolute", top: "calc(100% + 8px)", left: 0, right: 0, minWidth: 280, background: "white", borderRadius: 10, border: "1px solid var(--c-border)", boxShadow: "0 8px 30px rgba(0,0,0,0.1)", overflow: "hidden", zIndex: 500 }}>
+        <div role="listbox" style={{ position: "absolute", top: "calc(100% + 8px)", left: 0, right: 0, minWidth: 240, background: "white", borderRadius: 10, border: "1px solid var(--c-border)", boxShadow: "0 8px 30px rgba(0,0,0,0.1)", overflow: "hidden", zIndex: 500 }}>
           {results.map((p) => (
             <a key={p.id} href={`/product/${p.slug}`} role="option" onClick={() => { setOpen(false); setQuery(""); }} style={{ display: "flex", alignItems: "center", gap: 12, padding: "10px 14px", textDecoration: "none", borderBottom: "1px solid var(--c-border)" }}>
               <img src={p.img} alt="" style={{ width: 40, height: 40, objectFit: "cover", borderRadius: 6 }} />
@@ -57,7 +57,7 @@ export default function SearchBar() {
         </div>
       )}
       {open && debouncedQuery.length >= 2 && results.length === 0 && (
-        <div style={{ position: "absolute", top: "calc(100% + 8px)", left: 0, right: 0, minWidth: 280, background: "white", borderRadius: 10, border: "1px solid var(--c-border)", boxShadow: "0 8px 30px rgba(0,0,0,0.1)", padding: "16px", textAlign: "center", color: "var(--c-muted)", fontSize: "0.85rem", zIndex: 500 }}>
+        <div style={{ position: "absolute", top: "calc(100% + 8px)", left: 0, right: 0, minWidth: 240, background: "white", borderRadius: 10, border: "1px solid var(--c-border)", boxShadow: "0 8px 30px rgba(0,0,0,0.1)", padding: "16px", textAlign: "center", color: "var(--c-muted)", fontSize: "0.85rem", zIndex: 500 }}>
           No products found
         </div>
       )}

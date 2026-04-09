@@ -135,7 +135,7 @@ export default function CheckoutPage() {
 
           {errors.form && <div style={{ background: "#fde8e8", border: "1px solid #f5c6c6", borderRadius: 8, padding: "12px 16px", marginBottom: 24, color: "#c44", fontSize: "0.88rem" }}>{errors.form}</div>}
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 380px", gap: 40 }}>
+          <div className="grid-checkout">
             <div>
               <h3 style={{ fontSize: "0.72rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--c-gold)", marginBottom: 24 }}>Delivery Details</h3>
               <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>

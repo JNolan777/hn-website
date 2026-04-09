@@ -7,7 +7,7 @@ export default function Combos() {
         <span style={{ display: "block", fontSize: "0.72rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "var(--c-gold)", marginBottom: 12 }}>Save More</span>
         <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(1.8rem,3vw,2.5rem)", fontWeight: 300, color: "var(--c-green)" }}>Bundle & Save</h2>
       </div>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20, maxWidth: 900, margin: "0 auto" }}>
+      <div className="grid-combos" style={{ maxWidth: 900, margin: "0 auto" }}>
         {COMBOS.map((combo) => (
           <div key={combo.id} style={{ background: "white", borderRadius: 12, padding: "2rem", border: "1px solid var(--c-border)", textAlign: "center", boxShadow: "0 2px 12px rgba(0,0,0,0.03)" }}>
             <span style={{ display: "inline-block", background: "var(--c-green)", color: "white", padding: "4px 12px", borderRadius: 99, fontSize: "0.75rem", fontWeight: 500, letterSpacing: "0.05em", marginBottom: 12 }}>

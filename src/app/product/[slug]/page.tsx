@@ -75,8 +75,8 @@ export default function ProductPage() {
             <span style={{ color: "var(--c-green)", fontSize: "0.85rem" }}>{product.name}</span>
           </nav>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48 }}>
-            <div style={{ position: "relative", height: 450, borderRadius: 16, overflow: "hidden", border: "1px solid var(--c-border)" }}>
+          <div className="grid-product-detail">
+            <div style={{ position: "relative", height: "clamp(280px, 40vw, 450px)", borderRadius: 16, overflow: "hidden", border: "1px solid var(--c-border)" }}>
               <Image src={product.img} alt={`${product.name} - ${product.longDesc.slice(0, 80)}`} fill style={{ objectFit: "cover" }} sizes="50vw" priority />
               {product.badge && (
                 <span style={{ position: "absolute", top: 16, left: 16, background: product.badge === "Bestseller" ? "var(--c-green)" : "var(--c-gold)", color: "white", padding: "6px 14px", borderRadius: 6, fontSize: "0.7rem", letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 500, zIndex: 1 }}>

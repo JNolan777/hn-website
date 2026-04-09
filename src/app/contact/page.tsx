@@ -79,7 +79,7 @@ export default function ContactPage() {
           <div style={{ width: 60, height: 1, background: "var(--c-gold)", margin: "0 auto", opacity: 0.5 }} />
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48 }}>
+        <div className="grid-contact">
           {/* Contact Info */}
           <div>
             <h3 style={{ fontSize: "0.72rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--c-gold)", marginBottom: 24 }}>Reach Us</h3>

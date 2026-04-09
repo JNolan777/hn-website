@@ -87,7 +87,7 @@ export default function ProductGrid() {
         </div>
 
         {/* Photo grid */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 6, maxWidth: 1000, margin: "0 auto 48px", borderRadius: 16, overflow: "hidden" }}>
+        <div className="grid-story" style={{ maxWidth: 1000, margin: "0 auto 48px", borderRadius: 16, overflow: "hidden" }}>
           {[
             { src: "/images/story/craft-7.jpg", alt: "Crafting herbal soap" },
             { src: "/images/story/craft-6.jpg", alt: "Bamboo and charcoal soap" },
