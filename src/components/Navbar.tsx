@@ -5,10 +5,10 @@ import { useCart } from "@/context/CartContext";
 import SearchBar from "./SearchBar";
 
 const NAV_LINKS = [
-  { href: "#soaps", label: "Soaps" },
-  { href: "#body", label: "Body Care" },
-  { href: "#hair", label: "Hair Care" },
-  { href: "#about", label: "Our Story" },
+  { href: "/#soaps", label: "Soaps" },
+  { href: "/#body", label: "Body Care" },
+  { href: "/#hair", label: "Hair Care" },
+  { href: "/#about", label: "Our Story" },
   { href: "/contact", label: "Contact" },
 ];
 
