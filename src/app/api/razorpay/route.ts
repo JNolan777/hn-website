@@ -1,19 +1,29 @@
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
+import { rateLimit } from "@/lib/rateLimit";
 
-const KEY_ID = process.env.RAZORPAY_KEY_ID!;
-const KEY_SECRET = process.env.RAZORPAY_KEY_SECRET!;
+const KEY_ID = process.env.RAZORPAY_KEY_ID || "";
+const KEY_SECRET = process.env.RAZORPAY_KEY_SECRET || "";
 
 export async function POST(req: NextRequest) {
+  const ip = req.headers.get("x-forwarded-for") || "unknown";
+  if (!rateLimit(`razorpay:${ip}`, 10, 60000)) {
+    return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+  }
+
+  if (!KEY_ID || !KEY_SECRET) {
+    return NextResponse.json({ error: "Payment not configured" }, { status: 503 });
+  }
+
   try {
     const { amount } = await req.json();
 
-    if (!amount || amount <= 0) {
+    if (!amount || typeof amount !== "number" || amount <= 0 || amount > 100000) {
       return NextResponse.json({ error: "Invalid amount" }, { status: 400 });
     }
 
     const body = JSON.stringify({
-      amount: amount * 100, // Razorpay expects paise
+      amount: Math.round(amount * 100),
       currency: "INR",
       receipt: "hn_" + Date.now(),
     });
@@ -22,10 +32,7 @@ export async function POST(req: NextRequest) {
 
     const response = await fetch("https://api.razorpay.com/v1/orders", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Basic ${auth}`,
-      },
+      headers: { "Content-Type": "application/json", Authorization: `Basic ${auth}` },
       body,
     });
 
@@ -44,6 +51,10 @@ export async function POST(req: NextRequest) {
 export async function PUT(req: NextRequest) {
   try {
     const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = await req.json();
+
+    if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
+      return NextResponse.json({ error: "Missing fields" }, { status: 400 });
+    }
 
     const expectedSignature = crypto
       .createHmac("sha256", KEY_SECRET)

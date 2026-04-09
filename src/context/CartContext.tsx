@@ -1,9 +1,11 @@
 "use client";
 
-import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from "react";
+import { createContext, useContext, useState, useCallback, useEffect, useMemo, type ReactNode } from "react";
 import type { Product } from "@/lib/products";
+import { COMBOS } from "@/lib/products";
 
 export type CartItem = Product & { qty: number };
+export type AppliedCombo = { name: string; discount: number; saving: number };
 
 type CartContextType = {
   items: CartItem[];
@@ -12,7 +14,9 @@ type CartContextType = {
   changeQty: (id: number, delta: number) => void;
   clearCart: () => void;
   totalItems: number;
+  subtotal: number;
   totalPrice: number;
+  appliedCombo: AppliedCombo | null;
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
 };
@@ -30,11 +34,33 @@ function loadCart(): CartItem[] {
 }
 
 function saveCart(items: CartItem[]) {
-  try {
-    localStorage.setItem("hn-cart", JSON.stringify(items));
-  } catch {
-    // ignore
+  try { localStorage.setItem("hn-cart", JSON.stringify(items)); } catch { /* ignore */ }
+}
+
+function calculateCombo(items: CartItem[]): AppliedCombo | null {
+  if (items.length === 0) return null;
+
+  const totalQty = items.reduce((s, i) => s + i.qty, 0);
+  const subtotal = items.reduce((s, i) => s + i.price * i.qty, 0);
+
+  // Check combos from highest discount to lowest
+  const sorted = [...COMBOS].sort((a, b) => b.discount - a.discount);
+
+  for (const combo of sorted) {
+    if (combo.cat === "All" && totalQty >= combo.minItems) {
+      const saving = Math.round(subtotal * combo.discount / 100);
+      return { name: combo.name, discount: combo.discount, saving };
+    }
+    if (combo.cat !== "All") {
+      const catQty = items.filter((i) => i.cat === combo.cat).reduce((s, i) => s + i.qty, 0);
+      if (catQty >= combo.minItems) {
+        const catTotal = items.filter((i) => i.cat === combo.cat).reduce((s, i) => s + i.price * i.qty, 0);
+        const saving = Math.round(catTotal * combo.discount / 100);
+        return { name: combo.name, discount: combo.discount, saving };
+      }
+    }
   }
+  return null;
 }
 
 export function CartProvider({ children }: { children: ReactNode }) {
@@ -42,23 +68,13 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
-  // Load cart from localStorage on mount
-  useEffect(() => {
-    setItems(loadCart());
-    setLoaded(true);
-  }, []);
-
-  // Save cart to localStorage on change
-  useEffect(() => {
-    if (loaded) saveCart(items);
-  }, [items, loaded]);
+  useEffect(() => { setItems(loadCart()); setLoaded(true); }, []);
+  useEffect(() => { if (loaded) saveCart(items); }, [items, loaded]);
 
   const addItem = useCallback((product: Product) => {
     setItems((prev) => {
       const existing = prev.find((i) => i.id === product.id);
-      if (existing) {
-        return prev.map((i) => (i.id === product.id ? { ...i, qty: i.qty + 1 } : i));
-      }
+      if (existing) return prev.map((i) => (i.id === product.id ? { ...i, qty: i.qty + 1 } : i));
       return [...prev, { ...product, qty: 1 }];
     });
   }, []);
@@ -68,24 +84,19 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const changeQty = useCallback((id: number, delta: number) => {
-    setItems((prev) =>
-      prev
-        .map((i) => (i.id === id ? { ...i, qty: i.qty + delta } : i))
-        .filter((i) => i.qty > 0)
-    );
+    setItems((prev) => prev.map((i) => (i.id === id ? { ...i, qty: Math.max(0, i.qty + delta) } : i)).filter((i) => i.qty > 0));
   }, []);
 
-  const clearCart = useCallback(() => {
-    setItems([]);
-    localStorage.removeItem("hn-cart");
-  }, []);
+  const clearCart = useCallback(() => { setItems([]); localStorage.removeItem("hn-cart"); }, []);
 
   const totalItems = items.reduce((s, i) => s + i.qty, 0);
-  const totalPrice = items.reduce((s, i) => s + i.price * i.qty, 0);
+  const subtotal = items.reduce((s, i) => s + i.price * i.qty, 0);
+  const appliedCombo = useMemo(() => calculateCombo(items), [items]);
+  const totalPrice = subtotal - (appliedCombo?.saving || 0);
 
   return (
     <CartContext.Provider
-      value={{ items, addItem, removeItem, changeQty, clearCart, totalItems, totalPrice, isOpen, setIsOpen }}
+      value={{ items, addItem, removeItem, changeQty, clearCart, totalItems, subtotal, totalPrice, appliedCombo, isOpen, setIsOpen }}
     >
       {children}
     </CartContext.Provider>

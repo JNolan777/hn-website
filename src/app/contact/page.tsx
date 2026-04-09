@@ -113,16 +113,16 @@ export default function ContactPage() {
             <h3 style={{ fontSize: "0.72rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--c-gold)", marginBottom: 24 }}>Send a Message</h3>
             <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 20 }}>
               <div>
-                <label style={labelStyle}>Your Name *</label>
-                <input type="text" value={name} onChange={(e) => setName(e.target.value)} style={inputStyle} placeholder="Full name" />
+                <label htmlFor="contact-name" style={labelStyle}>Your Name *</label>
+                <input id="contact-name" type="text" value={name} onChange={(e) => setName(e.target.value)} style={inputStyle} placeholder="Full name" required />
               </div>
               <div>
-                <label style={labelStyle}>Email</label>
-                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} style={inputStyle} placeholder="your@email.com" />
+                <label htmlFor="contact-email" style={labelStyle}>Email</label>
+                <input id="contact-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} style={inputStyle} placeholder="your@email.com" />
               </div>
               <div>
-                <label style={labelStyle}>Message *</label>
-                <textarea value={message} onChange={(e) => setMessage(e.target.value)} rows={5} style={{ ...inputStyle, resize: "none" as const }} placeholder="How can we help you?" />
+                <label htmlFor="contact-message" style={labelStyle}>Message *</label>
+                <textarea id="contact-message" value={message} onChange={(e) => setMessage(e.target.value)} rows={5} style={{ ...inputStyle, resize: "none" as const }} placeholder="How can we help you?" required />
               </div>
               <button
                 type="submit"
