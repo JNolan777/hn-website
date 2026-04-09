@@ -46,7 +46,7 @@ export default function Home() {
             {[
               { label: "Our Philosophy", href: "#soaps" },
               { label: "Natural Ingredients", href: "#soaps" },
-              { label: "Produced by Synergy\u2122", href: "#contact" },
+              { label: "Produced by Synergy\u2122", href: "/contact" },
             ].map((item) => (
               <li key={item.label}>
                 <a href={item.href} style={{ fontSize: "0.92rem", color: "var(--c-muted)", textDecoration: "none", transition: "color 0.2s" }}>{item.label}</a>

@@ -15,7 +15,7 @@ export default function Navbar() {
           { href: "#soaps", label: "Soaps" },
           { href: "#body", label: "Body Care" },
           { href: "#hair", label: "Hair Care" },
-          { href: "#contact", label: "Contact" },
+          { href: "/contact", label: "Contact" },
         ].map((link) => (
           <li key={link.href}>
             <a href={link.href} className="no-underline text-[0.82rem] tracking-[0.15em] uppercase transition-colors" style={{ color: "var(--c-muted)" }}>
