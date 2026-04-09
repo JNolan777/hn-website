@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 
-// export const metadata is not supported in client components, but title is set via document
 
 export default function ContactPage() {
   const [name, setName] = useState("");
@@ -38,13 +37,18 @@ export default function ContactPage() {
       return;
     }
     try {
-      await fetch("/api/contact", {
+      const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, message }),
       });
+      if (!res.ok) {
+        alert("Failed to send message. Please try again or call us directly.");
+        return;
+      }
     } catch {
-      // still show success to user
+      alert("Network error. Please try again or call us at 8867863739.");
+      return;
     }
     setSubmitted(true);
   };
@@ -82,7 +86,7 @@ export default function ContactPage() {
 
             <div style={{ marginBottom: 28 }}>
               <h4 style={{ fontFamily: "var(--font-serif)", fontSize: "1.1rem", color: "var(--c-green)", marginBottom: 6 }}>Phone</h4>
-              <a href="tel:8867863739" style={{ fontSize: "0.95rem", color: "var(--c-muted)", textDecoration: "none" }}>+91 8867863739</a>
+              <a href="tel:+918867863739" style={{ fontSize: "0.95rem", color: "var(--c-muted)", textDecoration: "none" }}>+91 8867863739</a>
             </div>
 
             <div style={{ marginBottom: 28 }}>

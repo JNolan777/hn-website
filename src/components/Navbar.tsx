@@ -48,7 +48,7 @@ export default function Navbar() {
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
             className="show-mobile"
-            style={{ background: "none", border: "none", cursor: "pointer", padding: 4, display: "none" }}
+            style={{ background: "none", border: "none", cursor: "pointer", padding: 4 }}
             aria-label="Menu"
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--c-green)" strokeWidth="2" strokeLinecap="round">

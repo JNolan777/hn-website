@@ -1,9 +1,16 @@
 "use client";
 
+import { useEffect } from "react";
 import { useCart } from "@/context/CartContext";
 
 export default function CartDrawer() {
   const { items, totalItems, totalPrice, isOpen, setIsOpen, changeQty, removeItem } = useCart();
+
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => { if (e.key === "Escape") setIsOpen(false); };
+    if (isOpen) document.addEventListener("keydown", handleEsc);
+    return () => document.removeEventListener("keydown", handleEsc);
+  }, [isOpen, setIsOpen]);
 
   return (
     <>
@@ -31,7 +38,7 @@ export default function CartDrawer() {
           <h3 style={{ fontFamily: "var(--font-serif)", color: "var(--c-green)", fontSize: "1.4rem", fontWeight: 400 }}>
             Your Cart <span style={{ fontSize: "0.8rem", color: "var(--c-muted)", marginLeft: 8 }}>({totalItems})</span>
           </h3>
-          <button onClick={() => setIsOpen(false)} style={{ background: "none", border: "none", color: "var(--c-muted)", fontSize: "1.4rem", cursor: "pointer" }}>&#10005;</button>
+          <button onClick={() => setIsOpen(false)} aria-label="Close cart" style={{ background: "none", border: "none", color: "var(--c-muted)", fontSize: "1.4rem", cursor: "pointer" }}>&#10005;</button>
         </div>
 
         {/* Items */}

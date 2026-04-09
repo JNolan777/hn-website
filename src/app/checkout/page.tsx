@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { useCart } from "@/context/CartContext";
 import Script from "next/script";
+import Navbar from "@/components/Navbar";
+import CartDrawer from "@/components/CartDrawer";
 
 declare global {
   interface Window {
@@ -100,6 +102,8 @@ export default function CheckoutPage() {
 
   if (success) {
     return (
+      <>
+      <Navbar />
       <div style={{ minHeight: "100vh", background: "var(--c-bg)", display: "flex", alignItems: "center", justifyContent: "center", padding: "2rem" }}>
         <div style={{ textAlign: "center", maxWidth: 420 }}>
           <div style={{ fontSize: "4rem", color: "var(--c-green)", marginBottom: "1.5rem" }}>&#10003;</div>
@@ -111,11 +115,14 @@ export default function CheckoutPage() {
           </a>
         </div>
       </div>
+      </>
     );
   }
 
   return (
     <>
+      <Navbar />
+      <CartDrawer />
       <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="lazyOnload" />
       <div style={{ minHeight: "100vh", background: "var(--c-bg)", padding: "6rem 4vw 4rem" }}>
         <div style={{ maxWidth: 960, margin: "0 auto" }}>
