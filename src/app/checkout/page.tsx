@@ -10,6 +10,27 @@ declare global {
   }
 }
 
+const inputStyle: React.CSSProperties = {
+  width: "100%",
+  background: "white",
+  border: "1px solid var(--c-border)",
+  color: "var(--c-text)",
+  padding: "14px 16px",
+  borderRadius: 10,
+  fontSize: "0.95rem",
+  fontFamily: "var(--font-sans)",
+  outline: "none",
+};
+
+const labelStyle: React.CSSProperties = {
+  display: "block",
+  fontSize: "0.72rem",
+  letterSpacing: "0.15em",
+  textTransform: "uppercase",
+  color: "var(--c-muted)",
+  marginBottom: 8,
+};
+
 export default function CheckoutPage() {
   const { items, totalPrice, clearCart } = useCart();
   const [name, setName] = useState("");
@@ -77,17 +98,15 @@ export default function CheckoutPage() {
     }
   };
 
-  const inputClass = "w-full bg-white border border-[var(--c-border)] text-[var(--c-text)] px-4 py-3 rounded-lg text-sm outline-none focus:border-[var(--c-gold)] transition-colors";
-
   if (success) {
     return (
-      <div className="min-h-screen bg-[var(--c-bg)] flex items-center justify-center px-6">
-        <div className="text-center max-w-md">
-          <div className="text-6xl mb-6 text-[var(--c-green)]">&#10003;</div>
-          <h2 className="text-2xl text-[var(--c-green)] mb-3" style={{ fontFamily: "var(--font-serif)" }}>Order Confirmed!</h2>
-          <p className="text-[var(--c-muted)] text-sm mb-2">Order ID: <span className="text-[var(--c-gold)]">{orderId}</span></p>
-          <p className="text-[var(--c-muted)] text-sm mb-8">Thank you for shopping with H&N. We&apos;ll reach out to confirm delivery details.</p>
-          <a href="/" className="inline-block bg-[var(--c-green)] text-[var(--c-cream)] px-8 py-3 rounded-lg text-[0.72rem] tracking-[0.18em] uppercase font-medium no-underline hover:bg-[var(--c-green-light)] transition-colors">
+      <div style={{ minHeight: "100vh", background: "var(--c-bg)", display: "flex", alignItems: "center", justifyContent: "center", padding: "2rem" }}>
+        <div style={{ textAlign: "center", maxWidth: 420 }}>
+          <div style={{ fontSize: "4rem", color: "var(--c-green)", marginBottom: "1.5rem" }}>&#10003;</div>
+          <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "1.8rem", color: "var(--c-green)", marginBottom: 12 }}>Order Confirmed!</h2>
+          <p style={{ color: "var(--c-muted)", fontSize: "0.95rem", marginBottom: 6 }}>Order ID: <span style={{ color: "var(--c-gold)" }}>{orderId}</span></p>
+          <p style={{ color: "var(--c-muted)", fontSize: "0.95rem", marginBottom: 32 }}>Thank you for shopping with H&N. We&apos;ll reach out to confirm delivery details.</p>
+          <a href="/" style={{ display: "inline-block", background: "var(--c-green)", color: "var(--c-cream)", padding: "14px 32px", borderRadius: 10, fontSize: "0.78rem", letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 500, textDecoration: "none" }}>
             Continue Shopping
           </a>
         </div>
@@ -98,56 +117,64 @@ export default function CheckoutPage() {
   return (
     <>
       <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="lazyOnload" />
-      <div className="min-h-screen bg-[var(--c-bg)] pt-24 pb-16 px-[4vw]">
-        <div className="max-w-4xl mx-auto">
-          <a href="/" className="text-[var(--c-muted)] text-sm hover:text-[var(--c-green)] transition-colors no-underline">&larr; Back to shop</a>
-          <h1 className="text-3xl text-[var(--c-green)] font-light mt-6 mb-10" style={{ fontFamily: "var(--font-serif)" }}>Checkout</h1>
-          <div className="grid md:grid-cols-[1fr_380px] gap-10">
+      <div style={{ minHeight: "100vh", background: "var(--c-bg)", padding: "6rem 4vw 4rem" }}>
+        <div style={{ maxWidth: 960, margin: "0 auto" }}>
+          <a href="/" style={{ color: "var(--c-muted)", fontSize: "0.95rem", textDecoration: "none" }}>&larr; Back to shop</a>
+          <h1 style={{ fontFamily: "var(--font-serif)", fontSize: "2.2rem", color: "var(--c-green)", fontWeight: 300, marginTop: 24, marginBottom: 40 }}>Checkout</h1>
+
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 380px", gap: 40 }}>
+            {/* Form */}
             <div>
-              <h3 className="text-[0.65rem] tracking-[0.3em] uppercase text-[var(--c-gold)] mb-6">Delivery Details</h3>
-              <div className="flex flex-col gap-4">
+              <h3 style={{ fontSize: "0.72rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--c-gold)", marginBottom: 24 }}>Delivery Details</h3>
+              <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
                 <div>
-                  <label className="block text-[0.68rem] tracking-[0.15em] uppercase text-[var(--c-muted)] mb-2">Full Name *</label>
-                  <input type="text" value={name} onChange={(e) => setName(e.target.value)} className={inputClass} placeholder="Your name" style={{ fontFamily: "var(--font-sans)" }} />
+                  <label style={labelStyle}>Full Name *</label>
+                  <input type="text" value={name} onChange={(e) => setName(e.target.value)} style={inputStyle} placeholder="Your name" />
                 </div>
                 <div>
-                  <label className="block text-[0.68rem] tracking-[0.15em] uppercase text-[var(--c-muted)] mb-2">Email</label>
-                  <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className={inputClass} placeholder="your@email.com" style={{ fontFamily: "var(--font-sans)" }} />
+                  <label style={labelStyle}>Email</label>
+                  <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} style={inputStyle} placeholder="your@email.com" />
                 </div>
                 <div>
-                  <label className="block text-[0.68rem] tracking-[0.15em] uppercase text-[var(--c-muted)] mb-2">Phone *</label>
-                  <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} className={inputClass} placeholder="Your phone number" style={{ fontFamily: "var(--font-sans)" }} />
+                  <label style={labelStyle}>Phone *</label>
+                  <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} style={inputStyle} placeholder="Your phone number" />
                 </div>
                 <div>
-                  <label className="block text-[0.68rem] tracking-[0.15em] uppercase text-[var(--c-muted)] mb-2">Delivery Address *</label>
-                  <textarea value={address} onChange={(e) => setAddress(e.target.value)} rows={3} className={`${inputClass} resize-none`} placeholder="Full delivery address" style={{ fontFamily: "var(--font-sans)" }} />
+                  <label style={labelStyle}>Delivery Address *</label>
+                  <textarea value={address} onChange={(e) => setAddress(e.target.value)} rows={3} style={{ ...inputStyle, resize: "none" as const }} placeholder="Full delivery address" />
                 </div>
               </div>
             </div>
-            <div className="bg-white border border-[var(--c-border)] rounded-xl p-6 h-fit shadow-[0_2px_16px_rgba(0,0,0,0.04)]">
-              <h3 className="text-[0.65rem] tracking-[0.3em] uppercase text-[var(--c-gold)] mb-5">Order Summary</h3>
+
+            {/* Order Summary */}
+            <div style={{ background: "white", border: "1px solid var(--c-border)", borderRadius: 12, padding: 24, height: "fit-content", boxShadow: "0 2px 16px rgba(0,0,0,0.04)" }}>
+              <h3 style={{ fontSize: "0.72rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--c-gold)", marginBottom: 20 }}>Order Summary</h3>
               {items.length === 0 ? (
-                <p className="text-[var(--c-muted)] text-sm py-8 text-center">Cart is empty</p>
+                <p style={{ color: "var(--c-muted)", fontSize: "0.95rem", padding: "2rem 0", textAlign: "center" }}>Cart is empty</p>
               ) : (
                 <>
                   {items.map((item) => (
-                    <div key={item.id} className="flex gap-3 py-3 border-b border-[var(--c-border)]">
-                      <img src={item.img} alt={item.name} className="w-12 h-12 object-cover rounded-lg bg-[var(--c-bg2)]" />
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm text-[var(--c-green)] truncate">{item.name}</p>
-                        <p className="text-[0.7rem] text-[var(--c-muted)]">&#8377;{item.price} &times; {item.qty}</p>
+                    <div key={item.id} style={{ display: "flex", gap: 12, padding: "12px 0", borderBottom: "1px solid var(--c-border)" }}>
+                      <img src={item.img} alt={item.name} style={{ width: 48, height: 48, objectFit: "cover", borderRadius: 8, background: "var(--c-bg2)" }} />
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <p style={{ fontSize: "0.9rem", color: "var(--c-green)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{item.name}</p>
+                        <p style={{ fontSize: "0.78rem", color: "var(--c-muted)" }}>&#8377;{item.price} &times; {item.qty}</p>
                       </div>
-                      <span className="text-sm text-[var(--c-gold)]">&#8377;{item.price * item.qty}</span>
+                      <span style={{ fontSize: "0.9rem", color: "var(--c-gold)" }}>&#8377;{item.price * item.qty}</span>
                     </div>
                   ))}
-                  <div className="flex justify-between items-center py-4 mt-2">
-                    <span className="text-[0.7rem] tracking-[0.15em] uppercase text-[var(--c-muted)]">Total</span>
-                    <span className="text-xl font-medium text-[var(--c-green)]">&#8377;{totalPrice}</span>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "16px 0 8px" }}>
+                    <span style={{ fontSize: "0.78rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--c-muted)" }}>Total</span>
+                    <span style={{ fontSize: "1.3rem", fontWeight: 500, color: "var(--c-green)" }}>&#8377;{totalPrice}</span>
                   </div>
-                  <button onClick={handlePayment} disabled={loading} className="w-full bg-[var(--c-green)] text-[var(--c-cream)] border-none py-3.5 rounded-lg text-[0.72rem] tracking-[0.18em] uppercase font-medium cursor-pointer hover:bg-[var(--c-green-light)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed mt-2">
+                  <button
+                    onClick={handlePayment}
+                    disabled={loading}
+                    style={{ width: "100%", background: "var(--c-green)", color: "var(--c-cream)", border: "none", padding: "14px 0", borderRadius: 10, fontSize: "0.78rem", letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 500, cursor: loading ? "not-allowed" : "pointer", opacity: loading ? 0.5 : 1, marginTop: 8 }}
+                  >
                     {loading ? "Processing..." : `Pay \u20B9${totalPrice}`}
                   </button>
-                  <p className="text-[0.6rem] text-[var(--c-muted)] text-center mt-3 opacity-60">Secured by Razorpay</p>
+                  <p style={{ fontSize: "0.68rem", color: "var(--c-muted)", textAlign: "center", marginTop: 12, opacity: 0.6 }}>Secured by Razorpay</p>
                 </>
               )}
             </div>

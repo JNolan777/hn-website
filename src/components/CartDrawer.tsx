@@ -8,40 +8,51 @@ export default function CartDrawer() {
   return (
     <>
       <div
-        className={`fixed inset-0 z-[300] backdrop-blur-[4px] transition-all ${isOpen ? "opacity-100 visible" : "opacity-0 invisible"}`}
-        style={{ background: "rgba(0,0,0,0.3)" }}
         onClick={() => setIsOpen(false)}
+        style={{
+          position: "fixed", inset: 0, zIndex: 300,
+          background: "rgba(0,0,0,0.3)", backdropFilter: "blur(4px)",
+          transition: "all 0.3s",
+          opacity: isOpen ? 1 : 0,
+          visibility: isOpen ? "visible" as const : "hidden" as const,
+        }}
       />
 
-      <div
-        className={`fixed top-0 right-0 bottom-0 w-[420px] max-w-[95vw] z-[301] transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] flex flex-col ${isOpen ? "translate-x-0" : "translate-x-full"}`}
-        style={{ background: "var(--c-cream)", borderLeft: "1px solid var(--c-border)" }}
-      >
-        <div className="px-6 pt-6 pb-4 flex items-center justify-between" style={{ borderBottom: "1px solid var(--c-border)" }}>
-          <h3 className="text-[1.3rem] font-normal" style={{ fontFamily: "var(--font-serif)", color: "var(--c-green)" }}>
-            Your Cart <span className="text-[0.7rem] ml-2" style={{ color: "var(--c-muted)" }}>({totalItems})</span>
+      <div style={{
+        position: "fixed", top: 0, right: 0, bottom: 0,
+        width: 420, maxWidth: "95vw",
+        background: "var(--c-cream)", borderLeft: "1px solid var(--c-border)",
+        zIndex: 301, display: "flex", flexDirection: "column" as const,
+        transition: "transform 0.3s cubic-bezier(0.4,0,0.2,1)",
+        transform: isOpen ? "translateX(0)" : "translateX(100%)",
+      }}>
+        {/* Header */}
+        <div style={{ padding: "1.5rem 1.5rem 1rem", borderBottom: "1px solid var(--c-border)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <h3 style={{ fontFamily: "var(--font-serif)", color: "var(--c-green)", fontSize: "1.4rem", fontWeight: 400 }}>
+            Your Cart <span style={{ fontSize: "0.8rem", color: "var(--c-muted)", marginLeft: 8 }}>({totalItems})</span>
           </h3>
-          <button onClick={() => setIsOpen(false)} className="bg-transparent border-none text-xl cursor-pointer transition-colors" style={{ color: "var(--c-muted)" }}>&#10005;</button>
+          <button onClick={() => setIsOpen(false)} style={{ background: "none", border: "none", color: "var(--c-muted)", fontSize: "1.4rem", cursor: "pointer" }}>&#10005;</button>
         </div>
 
-        <div className="flex-1 overflow-y-auto px-6 py-4">
+        {/* Items */}
+        <div style={{ flex: 1, overflowY: "auto" as const, padding: "1rem 1.5rem" }}>
           {items.length === 0 ? (
-            <div className="text-center py-16">
-              <div className="text-4xl mb-4 opacity-30">&#128722;</div>
-              <p className="text-sm" style={{ color: "var(--c-muted)" }}>Your cart is empty</p>
+            <div style={{ textAlign: "center" as const, padding: "4rem 0" }}>
+              <div style={{ fontSize: "3rem", marginBottom: "1rem", opacity: 0.3 }}>&#128722;</div>
+              <p style={{ color: "var(--c-muted)", fontSize: "0.95rem" }}>Your cart is empty</p>
             </div>
           ) : (
             items.map((item) => (
-              <div key={item.id} className="flex gap-4 py-4" style={{ borderBottom: "1px solid var(--c-border)" }}>
-                <img src={item.img} alt={item.name} className="w-16 h-16 object-cover rounded-lg" style={{ background: "var(--c-bg2)" }} />
-                <div className="flex-1 min-w-0">
-                  <h4 className="text-sm truncate" style={{ fontFamily: "var(--font-serif)", color: "var(--c-green)" }}>{item.name}</h4>
-                  <p className="text-[0.7rem] mt-1" style={{ color: "var(--c-gold)" }}>&#8377;{item.price} &times; {item.qty}</p>
-                  <div className="flex items-center gap-3 mt-2">
-                    <button onClick={() => changeQty(item.id, -1)} className="w-6 h-6 rounded text-xs cursor-pointer flex items-center justify-center transition-colors" style={{ background: "var(--c-bg2)", border: "1px solid var(--c-border)", color: "var(--c-muted)" }}>&minus;</button>
-                    <span className="text-sm w-4 text-center" style={{ color: "var(--c-green)" }}>{item.qty}</span>
-                    <button onClick={() => changeQty(item.id, 1)} className="w-6 h-6 rounded text-xs cursor-pointer flex items-center justify-center transition-colors" style={{ background: "var(--c-bg2)", border: "1px solid var(--c-border)", color: "var(--c-muted)" }}>+</button>
-                    <button onClick={() => removeItem(item.id)} className="ml-auto text-[0.6rem] bg-transparent border-none cursor-pointer uppercase tracking-wider transition-colors hover:text-red-500" style={{ color: "var(--c-muted)" }}>Remove</button>
+              <div key={item.id} style={{ display: "flex", gap: "1rem", padding: "1rem 0", borderBottom: "1px solid var(--c-border)" }}>
+                <img src={item.img} alt={item.name} style={{ width: 64, height: 64, objectFit: "cover" as const, borderRadius: 8, background: "var(--c-bg2)" }} />
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <h4 style={{ fontFamily: "var(--font-serif)", fontSize: "0.95rem", color: "var(--c-green)", whiteSpace: "nowrap" as const, overflow: "hidden", textOverflow: "ellipsis" }}>{item.name}</h4>
+                  <p style={{ fontSize: "0.8rem", color: "var(--c-gold)", marginTop: 4 }}>&#8377;{item.price} &times; {item.qty}</p>
+                  <div style={{ display: "flex", alignItems: "center", gap: 12, marginTop: 8 }}>
+                    <button onClick={() => changeQty(item.id, -1)} style={{ width: 28, height: 28, borderRadius: 4, background: "var(--c-bg2)", border: "1px solid var(--c-border)", color: "var(--c-muted)", fontSize: 14, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>&minus;</button>
+                    <span style={{ fontSize: "0.95rem", color: "var(--c-green)", width: 16, textAlign: "center" as const }}>{item.qty}</span>
+                    <button onClick={() => changeQty(item.id, 1)} style={{ width: 28, height: 28, borderRadius: 4, background: "var(--c-bg2)", border: "1px solid var(--c-border)", color: "var(--c-muted)", fontSize: 14, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>+</button>
+                    <button onClick={() => removeItem(item.id)} style={{ marginLeft: "auto", fontSize: "0.65rem", color: "var(--c-muted)", background: "none", border: "none", cursor: "pointer", textTransform: "uppercase" as const, letterSpacing: "0.1em" }}>Remove</button>
                   </div>
                 </div>
               </div>
@@ -49,16 +60,16 @@ export default function CartDrawer() {
           )}
         </div>
 
+        {/* Footer */}
         {items.length > 0 && (
-          <div className="px-6 py-5" style={{ borderTop: "1px solid var(--c-border)" }}>
-            <div className="flex justify-between items-center mb-4">
-              <span className="text-[0.65rem] tracking-[0.2em] uppercase" style={{ color: "var(--c-muted)" }}>Total</span>
-              <span className="text-xl font-medium" style={{ color: "var(--c-green)" }}>&#8377;{totalPrice}</span>
+          <div style={{ padding: "1.25rem 1.5rem", borderTop: "1px solid var(--c-border)" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+              <span style={{ fontSize: "0.72rem", letterSpacing: "0.2em", textTransform: "uppercase" as const, color: "var(--c-muted)" }}>Total</span>
+              <span style={{ fontSize: "1.3rem", fontWeight: 500, color: "var(--c-green)" }}>&#8377;{totalPrice}</span>
             </div>
             <button
               onClick={() => { setIsOpen(false); window.location.href = "/checkout"; }}
-              className="w-full border-none py-3.5 rounded-lg text-[0.72rem] tracking-[0.18em] uppercase font-medium cursor-pointer transition-colors"
-              style={{ background: "var(--c-green)", color: "var(--c-cream)" }}
+              style={{ width: "100%", background: "var(--c-green)", color: "var(--c-cream)", border: "none", padding: "14px 0", borderRadius: 8, fontSize: "0.78rem", letterSpacing: "0.18em", textTransform: "uppercase" as const, fontWeight: 500, cursor: "pointer" }}
             >
               Proceed to Payment &#8594;
             </button>
