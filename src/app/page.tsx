@@ -12,40 +12,50 @@ export default function Home() {
       <CartDrawer />
 
       {/* Footer */}
-      <footer id="contact" className="grid grid-cols-1 md:grid-cols-[1.5fr_1fr_1fr] gap-12" style={{ background: "var(--c-bg3)", borderTop: "1px solid var(--c-border)", padding: "4rem 8vw" }}>
+      <footer id="contact" style={{ background: "var(--c-bg3)", borderTop: "1px solid var(--c-border)", padding: "4rem 8vw", display: "grid", gridTemplateColumns: "1.5fr 1fr 1fr", gap: "3rem" }}>
         <div>
-          <h3 className="text-[2.5rem] font-light mb-1" style={{ fontFamily: "var(--font-serif)", color: "var(--c-green)" }}>
+          <h3 style={{ fontFamily: "var(--font-serif)", fontSize: "2.5rem", fontWeight: 300, color: "var(--c-green)", marginBottom: 4 }}>
             H<span style={{ color: "var(--c-gold)" }}>&</span>N
           </h3>
-          <span className="text-[0.75rem] tracking-[0.2em] uppercase block mb-5" style={{ color: "var(--c-muted)" }}>
+          <span style={{ fontSize: "0.75rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--c-muted)", display: "block", marginBottom: 20 }}>
             Hair & Skin &middot; Purely Gentle, Naturally Effective
           </span>
-          <a href="tel:8867863739" className="text-[1rem] font-normal no-underline hover:underline" style={{ color: "var(--c-gold)" }}>
+          <a href="tel:8867863739" style={{ fontSize: "1rem", color: "var(--c-gold)", textDecoration: "none" }}>
             &#128222; 8867863739
           </a>
         </div>
         <div>
-          <h4 className="text-[0.7rem] tracking-[0.25em] uppercase mb-5" style={{ color: "var(--c-gold)" }}>Products</h4>
-          <ul className="list-none flex flex-col gap-3">
-            {["Artisan Soaps", "Body Lotions", "Hair Shampoos", "Hair Oils", "Herbal Remedies"].map((item) => (
-              <li key={item} className="text-[0.92rem] cursor-default transition-colors" style={{ color: "var(--c-muted)" }}>
-                {item}
+          <h4 style={{ fontSize: "0.7rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "var(--c-gold)", marginBottom: 20 }}>Products</h4>
+          <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: 12 }}>
+            {[
+              { label: "Artisan Soaps", href: "#soaps" },
+              { label: "Body Lotions", href: "#body" },
+              { label: "Hair Shampoos", href: "#hair" },
+              { label: "Hair Oils", href: "#hair" },
+              { label: "Herbal Remedies", href: "#body" },
+            ].map((item) => (
+              <li key={item.label}>
+                <a href={item.href} style={{ fontSize: "0.92rem", color: "var(--c-muted)", textDecoration: "none", transition: "color 0.2s" }}>{item.label}</a>
               </li>
             ))}
           </ul>
         </div>
         <div>
-          <h4 className="text-[0.7rem] tracking-[0.25em] uppercase mb-5" style={{ color: "var(--c-gold)" }}>About</h4>
-          <ul className="list-none flex flex-col gap-3">
-            {["Our Philosophy", "Natural Ingredients", "Produced by Synergy\u2122"].map((item) => (
-              <li key={item} className="text-[0.92rem] cursor-default transition-colors" style={{ color: "var(--c-muted)" }}>
-                {item}
+          <h4 style={{ fontSize: "0.7rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "var(--c-gold)", marginBottom: 20 }}>About</h4>
+          <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: 12 }}>
+            {[
+              { label: "Our Philosophy", href: "#soaps" },
+              { label: "Natural Ingredients", href: "#soaps" },
+              { label: "Produced by Synergy\u2122", href: "#contact" },
+            ].map((item) => (
+              <li key={item.label}>
+                <a href={item.href} style={{ fontSize: "0.92rem", color: "var(--c-muted)", textDecoration: "none", transition: "color 0.2s" }}>{item.label}</a>
               </li>
             ))}
           </ul>
         </div>
       </footer>
-      <div className="text-center text-[0.78rem]" style={{ background: "var(--c-bg3)", padding: "1.4rem 8vw", color: "rgba(122,112,96,0.5)", borderTop: "1px solid var(--c-border)" }}>
+      <div style={{ background: "var(--c-bg3)", padding: "1.4rem 8vw", textAlign: "center", fontSize: "0.78rem", color: "rgba(122,112,96,0.5)", borderTop: "1px solid var(--c-border)" }}>
         &copy; 2026 H&N Hair & Skin &middot; Purely Gentle, Naturally Effective &middot; Produced by Synergy&trade;
       </div>
     </>
