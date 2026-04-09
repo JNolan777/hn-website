@@ -14,49 +14,65 @@ export default function ProductCard({ product }: { product: Product }) {
     setTimeout(() => setAdded(false), 800);
   };
 
-  const catLabel = product.cat === "Soaps" ? "Soap" : product.cat === "Body" ? "Body Care" : "Hair Care";
-
   return (
     <div
-      className="bg-white rounded-xl overflow-hidden transition-all duration-300 min-w-0 hover:-translate-y-1 flex flex-col"
-      style={{ border: "1px solid var(--c-border)", boxShadow: "0 2px 16px rgba(0,0,0,0.04)" }}
+      style={{
+        background: "white",
+        borderRadius: 12,
+        overflow: "hidden",
+        border: "1px solid var(--c-border)",
+        boxShadow: "0 2px 16px rgba(0,0,0,0.04)",
+        transition: "transform 0.3s, box-shadow 0.3s",
+        display: "flex",
+        flexDirection: "column",
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.transform = "translateY(-4px)";
+        e.currentTarget.style.boxShadow = "0 12px 40px rgba(45,74,45,0.1)";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.transform = "translateY(0)";
+        e.currentTarget.style.boxShadow = "0 2px 16px rgba(0,0,0,0.04)";
+      }}
     >
       <img
         src={product.img}
         alt={product.name}
-        className="w-full h-[240px] object-cover block"
-        style={{ background: "var(--c-bg2)" }}
+        style={{ width: "100%", height: 220, objectFit: "cover", display: "block", background: "var(--c-bg2)" }}
       />
-      <div className="flex flex-col flex-1" style={{ padding: "1.6rem 1.6rem 1.8rem" }}>
-        <span className="text-[0.7rem] tracking-[0.2em] uppercase mb-2 block" style={{ color: "var(--c-gold)" }}>
-          {product.id} &middot; {product.tag}
+      <div style={{ padding: "1.4rem", flex: 1, display: "flex", flexDirection: "column" }}>
+        <span style={{ fontSize: "0.68rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--c-gold)", marginBottom: 6 }}>
+          {product.tag}
         </span>
-        <h3 className="text-[1.25rem] font-normal leading-tight mb-2" style={{ fontFamily: "var(--font-serif)", color: "var(--c-green)" }}>
+        <h3 style={{ fontFamily: "var(--font-serif)", fontSize: "1.2rem", fontWeight: 400, color: "var(--c-green)", lineHeight: 1.3, marginBottom: 6 }}>
           {product.name}
         </h3>
-        <p className="text-[0.88rem] leading-relaxed mb-5 flex-1" style={{ color: "var(--c-muted)" }}>
+        <p style={{ fontSize: "0.85rem", color: "var(--c-muted)", lineHeight: 1.6, marginBottom: 16, flex: 1 }}>
           {product.desc}
         </p>
-        {/* Price row with tag and button inline */}
-        <div className="flex items-center justify-between">
-          <span className="text-[1.35rem] font-medium" style={{ color: "var(--c-green)" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <span style={{ fontSize: "1.25rem", fontWeight: 500, color: "var(--c-green)" }}>
             &#8377;{product.price}
           </span>
-          <div className="flex items-center gap-2">
-            <span
-              className="text-[0.65rem] tracking-[0.12em] uppercase px-3 py-1 rounded-full"
-              style={{ background: "var(--c-bg2)", color: "var(--c-gold)", border: "1px solid var(--c-border)" }}
-            >
-              {catLabel}
-            </span>
-            <button
-              onClick={handleAdd}
-              className="border-none cursor-pointer text-[0.7rem] tracking-[0.1em] uppercase px-4 py-2 rounded-lg font-medium text-white transition-all hover:opacity-90"
-              style={{ fontFamily: "var(--font-sans)", background: added ? "var(--c-green-light)" : "var(--c-green)" }}
-            >
-              {added ? "Added!" : "+ Add"}
-            </button>
-          </div>
+          <button
+            onClick={handleAdd}
+            style={{
+              background: added ? "var(--c-green-light)" : "var(--c-green)",
+              color: "white",
+              border: "none",
+              padding: "8px 18px",
+              borderRadius: 8,
+              fontSize: "0.72rem",
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              fontWeight: 500,
+              cursor: "pointer",
+              fontFamily: "var(--font-sans)",
+              transition: "background 0.2s",
+            }}
+          >
+            {added ? "Added!" : "+ Add"}
+          </button>
         </div>
       </div>
     </div>
